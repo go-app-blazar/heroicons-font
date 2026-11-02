@@ -45,6 +45,7 @@ func main() {
 	}
 
 	constantMap := map[string]string{}
+	constantGroupMap := map[string][]string{}
 
 	for _, file := range files {
 		slog.Info("JSON file", "file", file)
@@ -73,6 +74,8 @@ func main() {
 			prettyName := "Icon" + makePretty(shortName+"-"+name)
 			slog.Info("pretty name", "prettyName", prettyName)
 			constantMap[prettyName] = fontName + "-" + name
+			constantGroupMap["Icon"] = append(constantGroupMap["Icon"], prettyName)
+			constantGroupMap["Icon"+makePretty(shortName)] = append(constantGroupMap["Icon"+makePretty(shortName)], prettyName)
 		}
 	}
 
@@ -82,6 +85,13 @@ func main() {
 			constantNames = append(constantNames, prettyName)
 		}
 		sort.Strings(constantNames)
+
+		constantGroupNames := []string{}
+		for constantGroupName := range constantGroupMap {
+			constantGroupNames = append(constantGroupNames, constantGroupName)
+		}
+		sort.Strings(constantGroupNames)
+		slog.Info("Constant group names", "constantGroupNames", constantGroupNames)
 
 		builder := strings.Builder{}
 		builder.WriteString("package heroicons\n")
@@ -94,6 +104,31 @@ func main() {
 			builder.WriteString(fmt.Sprintf("	%s = \"%s\"\n", constantName, constantValue))
 		}
 		builder.WriteString(")\n")
+		for _, constantGroupName := range constantGroupNames {
+			builder.WriteString("// ")
+			builder.WriteString(constantGroupName)
+			builder.WriteString(" returns all of the available ")
+			builder.WriteString(constantGroupName)
+			builder.WriteString(" icons.\n")
+			builder.WriteString("func ")
+			builder.WriteString(constantGroupName)
+			builder.WriteString("() []string {\n")
+			builder.WriteString("\treturn []string{\n")
+			var constantNames []string
+			for _, constantName := range constantGroupMap[constantGroupName] {
+				constantNames = append(constantNames, constantName)
+			}
+			sort.Strings(constantNames)
+			for _, constantName := range constantNames {
+				builder.WriteString("\t")
+				builder.WriteString(constantName)
+				builder.WriteString(",\n")
+			}
+			builder.WriteString("\t}\n")
+			builder.WriteString("}\n")
+			builder.WriteString("\n")
+		}
+
 		contents := builder.String()
 		err = os.WriteFile("constants.go", []byte(contents), 0644)
 		if err != nil {

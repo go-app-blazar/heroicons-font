@@ -29,6 +29,7 @@ build: bin embedded
 		sed "$$file" -i -e 's/\(url.*woff2.*\),$$/src: \1;/'; \
 	done
 	go generate ./...
+	go fmt ./...
 	cp -v -f bin/fonts/*.woff2 bin/fonts/*.css embedded/
 
 .PHONY: clean
