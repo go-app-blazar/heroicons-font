@@ -1,6 +1,6 @@
 @font-face {
   font-family: "hi-solid";
-  url('hi-solid.woff2') format('woff2'),
+  src: url('hi-solid.woff2') format('woff2');
 }
 
 [class^="hi-solid-"], [class*=" hi-solid-"] {

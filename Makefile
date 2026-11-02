@@ -24,10 +24,9 @@ build: bin embedded
 		bin/node_modules/.bin/svgtofont --sources "$$dir" --output bin/fonts --fontName "$(PREFIX)$$(basename "$$dir")"; \
 	done
 	for file in bin/fonts/*.css; do \
-		# Remove the "?t=<timestamp>" parts from the URLs.
 		sed "$$file" -i -e 's/[?]t=[0-9]\+//'; \
-		# Remove the unused fonts.
-		sed "$$file" -i -e '/\.\(eot\|svg\|ttf\|woff\)\b/d'
+		sed "$$file" -i -e '/\.\(eot\|svg\|ttf\|woff\)\b/d'; \
+		sed "$$file" -i -e 's/\(url.*woff2.*\),$/src: \1;/'; \
 	done
 	go generate ./...
 	cp -v -f bin/fonts/*.woff2 bin/fonts/*.css embedded/

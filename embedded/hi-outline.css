@@ -1,6 +1,6 @@
 @font-face {
   font-family: "hi-outline";
-  url('hi-outline.woff2') format('woff2'),
+  src: url('hi-outline.woff2') format('woff2');
 }
 
 [class^="hi-outline-"], [class*=" hi-outline-"] {
