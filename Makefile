@@ -26,7 +26,7 @@ build: bin embedded
 	for file in bin/fonts/*.css; do \
 		sed "$$file" -i -e 's/[?]t=[0-9]\+//'; \
 		sed "$$file" -i -e '/\.\(eot\|svg\|ttf\|woff\)\b/d'; \
-		sed "$$file" -i -e 's/\(url.*woff2.*\),$/src: \1;/'; \
+		sed "$$file" -i -e 's/\(url.*woff2.*\),$$/src: \1;/'; \
 	done
 	go generate ./...
 	cp -v -f bin/fonts/*.woff2 bin/fonts/*.css embedded/
