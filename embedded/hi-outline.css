@@ -1,11 +1,6 @@
 @font-face {
   font-family: "hi-outline";
-  src: url('hi-outline.eot?t=1793582642834'); /* IE9*/
-  src: url('hi-outline.eot?t=1793582642834#iefix') format('embedded-opentype') /* IE6-IE8 */,
-  url('hi-outline.woff2?t=1793582642834') format('woff2'),
-  url('hi-outline.woff?t=1793582642834') format('woff'),
-  url('hi-outline.ttf?t=1793582642834') format('truetype'),
-  url('hi-outline.svg?t=1793582642834') format('svg');
+  url('hi-outline.woff2') format('woff2'),
 }
 
 [class^="hi-outline-"], [class*=" hi-outline-"] {

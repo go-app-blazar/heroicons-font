@@ -1,11 +1,6 @@
 @font-face {
   font-family: "hi-solid";
-  src: url('hi-solid.eot?t=1793582644030'); /* IE9*/
-  src: url('hi-solid.eot?t=1793582644030#iefix') format('embedded-opentype') /* IE6-IE8 */,
-  url('hi-solid.woff2?t=1793582644030') format('woff2'),
-  url('hi-solid.woff?t=1793582644030') format('woff'),
-  url('hi-solid.ttf?t=1793582644030') format('truetype'),
-  url('hi-solid.svg?t=1793582644030') format('svg');
+  url('hi-solid.woff2') format('woff2'),
 }
 
 [class^="hi-solid-"], [class*=" hi-solid-"] {
